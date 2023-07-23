@@ -16,3 +16,10 @@ body {
   @apply font-body
 }
 
+.slider-btn{
+  @apply absolute top-1/2 translate-y-[-50%] bg-white-50 rounded-full opacity-60 active:bg-white-400
+}
+
+.home-scroll-section::-webkit-scrollbar{
+  width: 0;
+}
