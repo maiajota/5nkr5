@@ -16,10 +16,18 @@ body {
   @apply font-body
 }
 
+.screen-space{
+  @apply max-w-[80vw] mx-auto
+}
+
 .slider-btn{
   @apply absolute top-1/2 translate-y-[-50%] bg-white-50 rounded-full opacity-60 active:bg-white-400
 }
 
 .home-scroll-section::-webkit-scrollbar{
   width: 0;
+}
+
+.sections-link{
+  @apply hover:tracking-widest transition-all cursor-pointer border-b-2 border-grey-300 hover:border-grey-200 
 }
