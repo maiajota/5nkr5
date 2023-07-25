@@ -11,3 +11,13 @@ model User {
   id   String @id @default(uuid())
   name String
 }
+
+model Product {
+  id        String   @id @default(uuid())
+  name      String
+  imageURL  String
+  style     String
+  price     Float
+  favourite Boolean? @default(false)
+  cart      Boolean? @default(false)
+}

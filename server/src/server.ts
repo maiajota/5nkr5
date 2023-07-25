@@ -1,15 +1,14 @@
-import fastify from 'fastify'
-import { PrismaClient } from '@prisma/client'
+import fastify from 'fastify';
+import cors from '@fastify/cors';
+import { productsRoutes } from './routes/products';
 
-const app = fastify()
-const prisma = new PrismaClient()
+const app = fastify();
 
-app.get('/', async () => {
-  const users = await prisma.user.findMany()
-
-  return users
+app.register(cors, {
+	origin: true //todas URLs de Front-End poderão acessar o Back-End
 })
+app.register(productsRoutes);
 
 app.listen({ port: 3001 }).then(() => {
-  console.log('SERVER RUNNING ON PORT 3001')
-})
+	console.log('SERVER ON PORT 3001');
+});
