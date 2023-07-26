@@ -1,25 +1,43 @@
-import { Header } from '@/components/Header'
-import { Search, SlidersHorizontal } from 'lucide-react'
+import { api } from '@/lib/api'
+import { SearchNavBar } from '@/components/SearchNavBar'
 
-export default function NavPage() {
+export default async function NavPage() {
+  interface product {
+    id: string
+    imageURL: string
+    name: string
+    style: string
+    price: number
+  }
+
+  const products: product[] = []
+
+  await api.get('/products').then((response) => {
+    response.data.map((item: product) => {
+      return products.push(item)
+    })
+  })
+
   return (
     <div>
-      <nav>
-        <Header hasLogo={true} />
-        <div className="flex h-[8vh] w-full items-center justify-center gap-4 bg-grey-600 shadow-xl">
-          <form action="" className="flex h-full w-[80%] items-center">
-            <Search size={14} className="absolute px-2" />
-            <input
-              type="text"
-              name=""
-              id=""
-              placeholder="Buscar"
-              className="h-[70%] w-full rounded-2xl text-sm placeholder:px-8"
-            />
-          </form>
-          <SlidersHorizontal className="text-white-300" />
-        </div>
-      </nav>
+      <SearchNavBar />
+      <div className="grid-nav screen-space grid gap-4">
+        {products.map((product) => {
+          return (
+            <a key="" className="max-w-[300px] cursor-pointer" href="">
+              <img
+                src={`images/products/${product.imageURL}.png`}
+                alt=""
+                className="w-full bg-grey-100"
+              />
+              <div className="m-2 font-title">
+                <h2 className="text-sm">{product.name}</h2>
+                <p className="text-xs text-gray-700">R$ {product.price}</p>
+              </div>
+            </a>
+          )
+        })}
+      </div>
     </div>
   )
 }

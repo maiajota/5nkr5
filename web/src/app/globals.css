@@ -31,3 +31,7 @@ body {
 .sections-link{
   @apply hover:tracking-widest transition-all cursor-pointer border-b-2 border-grey-300 hover:border-grey-200 
 }
+
+.grid-nav{
+  grid-template-columns: repeat(2, minmax(100px, 1fr));
+}
