@@ -6,12 +6,11 @@ export async function productsRoutes(app: FastifyInstance) {
 	app.get('/products', async () => {
 		const products = await prisma.product.findMany();
 
-
 		return products.map(product => {
 			return {
 				id: product.id,
-				imageURL: product.imageURL,
 				name: product.name,
+				imageURL: product.imageURL,
 				style: product.style,
 				price: product.price,
 			};

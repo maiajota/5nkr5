@@ -13,11 +13,17 @@ model User {
 }
 
 model Product {
-  id        String   @id @default(uuid())
-  name      String
-  imageURL  String
-  style     String
-  price     Float
-  favourite Boolean? @default(false)
-  cart      Boolean? @default(false)
+  id       String @id @default(uuid())
+  name     String
+  imageURL String
+  style    String
+  price    Float
+  Cart     Cart[]
+}
+
+model Cart {
+  id        String  @id @default(uuid())
+  number    Int
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
 }
