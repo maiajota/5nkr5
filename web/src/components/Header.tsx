@@ -1,4 +1,4 @@
-import { Heart, Menu, ShoppingBag } from 'lucide-react'
+import { Heart, Menu, ShoppingBag, User } from 'lucide-react'
 
 interface HeaderProps {
   hasLogo?: boolean
@@ -17,9 +17,16 @@ export function Header({ hasLogo }: HeaderProps) {
         </a>
       )}
       <nav className="flex gap-8 px-4">
-        <Heart size={24} />
-        <ShoppingBag size={24} />
-        <Menu size={24} className="sm:hidden" />
+        <a
+          href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}`}
+        >
+          <User />
+        </a>
+        <a href="/favourite">
+          <Heart />
+        </a>
+        <ShoppingBag />
+        <Menu className="sm:hidden" />
       </nav>
     </header>
   )

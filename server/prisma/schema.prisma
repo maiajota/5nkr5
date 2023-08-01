@@ -8,22 +8,45 @@ datasource db {
 }
 
 model User {
-  id   String @id @default(uuid())
-  name String
+  id        String      @id @default(uuid())
+  githubId  Int         @unique
+  name      String
+  Favourite Favourite[]
+  Cart      Cart[]
 }
 
 model Product {
-  id       String @id @default(uuid())
-  name     String
-  imageURL String
-  style    String
-  price    Float
-  Cart     Cart[]
+  id          String      @id @default(uuid())
+  name        String
+  description String
+  price       Float
+  imageURL    String
+  style       String
+  Sku         Sku[]
+  Favourite   Favourite[]
+}
+
+model Sku {
+  id        String  @id @default(uuid())
+  productId String
+  Size      Int
+  quantity  Int
+  product   Product @relation(fields: [productId], references: [id])
+  Cart      Cart[]
+}
+
+model Favourite {
+  id        String  @id @default(uuid())
+  productId String
+  userId    String
+  product   Product @relation(fields: [productId], references: [id])
+  user      User    @relation(fields: [userId], references: [id])
 }
 
 model Cart {
-  id        String  @id @default(uuid())
-  number    Int
-  productId String
-  product   Product @relation(fields: [productId], references: [id])
+  id     String @id @default(uuid())
+  skuId  String
+  cartId String
+  sku    Sku    @relation(fields: [skuId], references: [id])
+  user   User   @relation(fields: [cartId], references: [id])
 }

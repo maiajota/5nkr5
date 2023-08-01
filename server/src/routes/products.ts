@@ -10,9 +10,10 @@ export async function productsRoutes(app: FastifyInstance) {
 			return {
 				id: product.id,
 				name: product.name,
+				description: product.description,
+				price: product.price,
 				imageURL: product.imageURL,
 				style: product.style,
-				price: product.price,
 			};
 		});
 	});

@@ -1,15 +1,19 @@
-import { api } from '@/lib/api'
 import { SearchNavBar } from '@/components/SearchNavBar'
+import { getUser } from '@/lib/auth'
 import { Product } from '@/lib/product'
+import { getProduct } from '@/services/product'
+import { getUserFavouriteProductIds } from '@/services/users'
 
-export default async function NavPage() {
-  const products: Product[] = []
+async function getUserFavouriteProducts(id: string): Promise<Product[]> {
+  const productIds = await getUserFavouriteProductIds(id)
+  return await Promise.all(
+    productIds.map((productId: string) => getProduct(productId)),
+  )
+}
 
-  await api.get('/products').then((response) => {
-    response.data.map((item: Product) => {
-      return products.push(item)
-    })
-  })
+export default async function Favourite() {
+  const { id } = getUser()
+  const products = await getUserFavouriteProducts(id)
 
   return (
     <main>
